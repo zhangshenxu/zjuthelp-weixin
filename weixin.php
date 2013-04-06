@@ -36,6 +36,7 @@ class weixin_class extends AWS_MODEL
 					</Articles>
 					<FuncFlag>0</FuncFlag>
 					</xml>';
+	var $help = "发送以下关键词：\n【课表】查询原创课表（部分用户可能课表有误）\n【天气】查看校园天气\n【校车】查校车时刻表\n【外卖】提供外卖号码\n【优惠】最新优惠活动\n【电话】查看校园电话\n【黄历】查工大老黄历\n【求签】测测各类吉凶\n\n关键词以外的回复皆默认搜索工大助手问答平台www.izjut.com并根据网站回答回复相应答案";
 	public function fetch_message()
 	{
 		$postStr = file_get_contents('php://input');
@@ -64,7 +65,7 @@ class weixin_class extends AWS_MODEL
 			switch ($input_message['event'])
 			{
 				case 'subscribe':
-					$response_message = '您已经成功关注 ' . get_setting('site_name') . ',您可以随意输入您想问的问题,会有意想不到的结果等着您! 如果需要其他使用帮助,请输入 FN99';
+					$response_message = "欢迎关注 ". get_setting('site_name') . "————工大学子的学习生活好帮手\n\n".$this->help;
 					echo sprintf($this->text_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'], $response_message);
 				break;
 			}
@@ -73,6 +74,10 @@ class weixin_class extends AWS_MODEL
 		{
 			switch ($input_message['content'])
 			{
+				case "帮助":
+                    $response_message = $this->help;
+					echo sprintf($this->text_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'], $response_message);
+                    break;
 				case '校车':
 					$contentPicUrl ='http://mmsns.qpic.cn/mmsns/nMeVe6ic1s7MUE8P8fuIpUwFG8KZzVERuibpMiaVFVD2hicHzwtpPia5b4g/0';
                    	$contentUrl='http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NzY2NTcyMQ==&appmsgid=10000031&itemidx=1#wechat_redirect';
@@ -84,8 +89,33 @@ class weixin_class extends AWS_MODEL
                     break;
                 case "课表":
                 	$contentPicUrl ="";
-                   	$contentUrl="http://zjutquery.duapp.com/";
+                   	$contentUrl="http://www.izjut.com/weixin/zjutfunction/loginyuanchuang.html";
 					echo sprintf($this->news1_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'],'本学期课表查询','',$contentPicUrl,$contentUrl);
+                    break;
+                case "优惠":
+                	$contentPicUrl ="";
+                   	$contentUrl="http://mp.weixin.qq.com/mp/appmsg/show?__biz=MjM5NzY2NTcyMQ==&appmsgid=10000041&itemidx=1#wechat_redirect";
+					echo sprintf($this->news1_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'],'最新校园周边优惠活动','',$contentPicUrl,$contentUrl);
+                    break;
+                case "外卖":
+                	$contentPicUrl ="";
+                   	$contentUrl="http://www.izjut.com/weixin/zjutfunction/food.html";
+					echo sprintf($this->news1_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'],'提供部分外卖电话','',$contentPicUrl,$contentUrl);
+                    break;
+                case "电话":
+                	$contentPicUrl ="";
+                   	$contentUrl="http://www.izjut.com/weixin/zjutfunction/tel.html";
+					echo sprintf($this->news1_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'],'校内各种电话热线','',$contentPicUrl,$contentUrl);
+                    break;
+                case "黄历":
+                    $contentPicUrl ="http://www.fjsen.com/images/attachement/jpg/site1/2011-12-23/5160716855638538788.jpg";
+                   	$contentUrl="http://www.izjut.com/weixin/zjutcal/";
+					echo sprintf($this->news1_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'],'工大老黄历','',$contentPicUrl,$contentUrl);
+                    break;
+                case "求签":
+                    $contentPicUrl ="http://d.hiphotos.baidu.com/baike/pic/item/0dd7912397dda14406509992b3b7d0a20cf486b1.jpg";
+                   	$contentUrl="http://www.izjut.com/weixin/zjutpray/";
+					echo sprintf($this->news1_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'],'工大求签','',$contentPicUrl,$contentUrl);
                     break;
 				default:
 					if ($search_result = $this->model('search')->search_questions($input_message['content'], null, 6))
@@ -342,7 +372,7 @@ class weixin_class extends AWS_MODEL
 		$output = file_get_contents($url);
 		$weather = json_decode($output,true);
 		$info = $weather['weatherinfo'];
-		$result = "今天：".$info['temp1']." ".$info['weather1']." ".$info['wind1']."\n明天：".$info['temp2']." ".$info['weather2']." ".$info['wind2']."\n后天：".$info['temp3']." ".$info['weather3']." ".$info['wind3']."\n\n提醒：".$info['index_d']."\n去操场锻炼可以嘛？".$info['index_cl']."\n洗晒衣服怎么样？".$info['index_ls'];
+		$result = "今天：".$info['temp1']." ".$info['weather1']." ".$info['wind1']."\n明天：".$info['temp2']." ".$info['weather2']." ".$info['wind2']."\n后天：".$info['temp3']." ".$info['weather3']." ".$info['wind3'];
       	return $result;
 	}
 }
