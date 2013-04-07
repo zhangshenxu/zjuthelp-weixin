@@ -147,7 +147,7 @@ class weixin_class extends AWS_MODEL
 					}
 					else
 					{
-						$response_message = "抱歉, 没有找到相关问题, 请您替换关键词重新检索\n如果您要继续提问，可以<a href=\"" . get_js_url('/m/add_question/' . urlencode($input_message['content'])) . "\">点击这里提问</a>. 您也可以通过输入: FNNF 查看最新通知";
+						$response_message = "抱歉, 没有找到相关问题, 请您替换关键词重新检索\n如果您要继续提问，可以<a href=\"" . get_js_url('/m/add_question/' . urlencode($input_message['content'])) . "\">点击这里提问</a>.\n\n回复 帮助 查看如何使用";
 					}
 					echo sprintf($this->text_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'], $response_message);
 					break;
