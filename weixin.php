@@ -65,7 +65,8 @@ class weixin_class extends AWS_MODEL
 			switch ($input_message['event'])
 			{
 				case 'subscribe':
-					$response_message = "欢迎关注 ". get_setting('site_name') . "————工大学子的学习生活好帮手\n\n".$this->help;
+					//$response_message = "欢迎关注 ". get_setting('site_name') . "————工大学子的学习生活好帮手\n\n".$this->help;
+					$response_message = "欢迎关注 工大助手————工大学子的学习生活好帮手\n\n".$this->help;
 					echo sprintf($this->text_tpl, $input_message['fromUsername'], $input_message['toUsername'], $input_message['time'], $response_message);
 				break;
 			}
