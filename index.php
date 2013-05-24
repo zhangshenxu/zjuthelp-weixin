@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 //define your token
 define("TOKEN", "zjuthelp");
@@ -60,7 +60,7 @@ class zjuthelp
 							</Articles>
 							<FuncFlag>0</FuncFlag>
 							</xml>";
-          		$help = "发送：\n【课表】查询原创课表（部分用户可能课表有误）\n【天气】查看校园天气\n【校车】查校车时刻表\n【外卖】提供外卖号码\n【优惠】最新优惠活动\n【电话】查看校园电话\n【黄历】查工大老黄历\n【求签】测测各类吉凶";
+          		$help = "发送：\n【课表】查询课表（部分用户可能课表有误）\n【天气】查看校园天气\n【校车】查校车时刻表\n【外卖】提供外卖号码\n【优惠】最新优惠活动\n【电话】查看校园电话\n【黄历】查工大老黄历\n【求签】测测各类吉凶\n【容大】对容大服务建议、投诉\n----------\n切记，请发送括号中的字即可，忘记指令请发送【帮助】查看使用指令";
 				if(!empty($event))
                 {
                   	$msgType = "text";
@@ -92,19 +92,19 @@ class zjuthelp
                          	break;
                         case "课表":
                     		$contentPicUrl ="";
-                       	    $contentUrl="http://www.izjut.com/help/loginyuanchuang.html";
+                       	    $contentUrl="http://help.izjut.com/loginyuanchuang.html";
                     		$resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, "课表查询","",$contentPicUrl,$contentUrl);
                     		echo $resultStr;
                          	break;
                         case "外卖":
                     		$contentPicUrl ="";
-                            $contentUrl="http://www.izjut.com/help/food.html";
+                            $contentUrl="http://help.izjut.com/food.html";
                             $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, "提供部分外卖电话","",$contentPicUrl,$contentUrl);
                             echo $resultStr;
                             break;
                         case "电话":
                     		$contentPicUrl ="";
-                            $contentUrl="http://www.izjut.com/help/tel.html";
+                            $contentUrl="http://help.izjut.com/tel.html";
                             $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, "校内各种电话热线","",$contentPicUrl,$contentUrl);
                             echo $resultStr;
                             break;
@@ -115,16 +115,22 @@ class zjuthelp
                          	break;
                         case "黄历":
                             $contentPicUrl ="http://www.fjsen.com/images/attachement/jpg/site1/2011-12-23/5160716855638538788.jpg";
-                            $contentUrl="http://www.izjut.com/help/zjutcal/";
+                            $contentUrl="http://help.izjut.com/zjutcal/";
                             $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, "工大老黄历","",$contentPicUrl,$contentUrl);
                             echo $resultStr;
                             break;
                         case "求签":
                             $contentPicUrl ="http://d.hiphotos.baidu.com/baike/pic/item/0dd7912397dda14406509992b3b7d0a20cf486b1.jpg";
-                            $contentUrl="http://www.izjut.com/help/zjutpray/";
+                            $contentUrl="http://help.izjut.com/zjutpray/";
                             $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, "工大求签","",$contentPicUrl,$contentUrl);
                             echo $resultStr;
                             break;
+						case "容大":
+                    		$contentPicUrl ="";
+                       	    $contentUrl="http://help.izjut.com/words.html";
+                    		$resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, "对容大服务进行建议、投诉","",$contentPicUrl,$contentUrl);
+                    		echo $resultStr;
+                         	break;
                         /*default:
                         	$msgType = "text";
                     		$contentStr = "指令【".$keyword."】未定义，请输入【帮助】查看如何使用.";
