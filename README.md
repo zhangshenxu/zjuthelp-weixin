@@ -12,5 +12,5 @@
 * 优惠信息查询
 * [工大老黄历](https://github.com/suziewong/zjutcal)
 * [工大求签](https://github.com/zhangshenxu/zjutpray)
-* [容大反馈(htp://help.izjut.com/words.html)
+* [容大反馈](http://help.izjut.com/words.html)
 另外还有个展示页
