@@ -11,6 +11,9 @@ $arr=file_get_contents("http://210.32.200.89:65001/zjuthelper/classtable/open/ap
 $arr = json_decode($arr);
 /*var_dump($arr);
 exit;*/
+$arr2=file_get_contents("http://210.32.200.95:8080/CatchExamService/GetService1?user=".$username."&password=".$password."&year=2012%2F2013&number=2&submit=%B2%E9%D5%D2");
+$arr2 = json_decode($arr2);
+print_r($arr2);
 }
 ?>
 
